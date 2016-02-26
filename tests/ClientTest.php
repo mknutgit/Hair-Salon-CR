@@ -15,10 +15,10 @@
 
     class ClientTest extends PHPunit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Client::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Client::deleteAll();
+        }
 
         function test_getClientName()
         {
@@ -53,9 +53,50 @@
             $result = $test_client_name->getId();
 
             $this->assertEquals(true, is_numeric($result));
-
-
         }
+
+        function test_save()
+        {
+            //Arrange
+            $client_name = "Bill";
+            $phone = "1234567890";
+            $email = "m@gmail.com";
+            $stylist_id = 1;
+            $id = null;
+
+            $test_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+            $test_client->save();
+            //Act
+            $result = Client::getAll();
+            //Assert
+            $this->assertEquals($test_client, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $client_name = "Bill";
+            $phone = "1234567890";
+            $email = "m@gmail.com";
+            $stylist_id = 1;
+            $id = null;
+            $test_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+            $test_client->save();
+
+            $client_name2 = "Jim";
+            $phone2 = "1234567890";
+            $email2 = "g@gmail.com";
+            $stylist_id2 = 2;
+            $id2 = 2;
+            $test_client2 = new Client($client_name2, $phone2, $email2, $stylist_id2, $id2);
+            $test_client2->save();
+            //Act
+            $result = Client::getAll();
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
+        
 
     }
 
