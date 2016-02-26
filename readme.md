@@ -18,8 +18,13 @@ Create an app for a hair salon. The owner should be able to add a list of their 
 * _In terminal, run "composer install" to get silex and twig engaged_
 * _Enter localhost:8000 into your browser to see the application_
 
+## Mysql commands Used
 
-__
+_CREATE DATABASE hair_salon;_
+_USE hair_salon;_
+_CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));_
+_CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), phone VARCHAR (255), email VARCHAR (255) stylist_id int);_
+_CREATE DATABASE hair_salon_
 
 ## Known Bugs
 
