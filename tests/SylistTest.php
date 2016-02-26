@@ -5,20 +5,19 @@
     * @backupStaticAttributes disabled
     */
 
-    require_once "src/Stylist.php";
-
     $server = 'mysql:host=localhost;dbname=hair_salon_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
+    require_once 'src/Stylist.php';
+
     class StylistTest extends PHPunit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Stylist::deleteAll();
-        //     Client::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Stylist::deleteAll();
+        }
 
         function test_getName()
         {
@@ -27,8 +26,21 @@
 
             $result = $test_name->getName();
 
-            $this->assertEquals($type, $result);
+            $this->assertEquals("Sally", $result);
         }
+
+        function test_getId()
+       {
+           //Arrange
+           $name = "Sally";
+           $id = 1;
+           $test_stylist = new Stylist($name, $id);
+           //Act
+           $result = $test_stylist->getId();
+           //Assert
+           $this->assertEquals(true, is_numeric($result));
+       }
+
     }
 
 
