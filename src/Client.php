@@ -1,7 +1,7 @@
 <?php
-    class client
+    class Client
     {
-        private $client_name
+        private $client_name;
         private $phone;
         private $email;
         private $stylist_id;
