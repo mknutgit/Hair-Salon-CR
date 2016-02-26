@@ -17,7 +17,7 @@
     {
         // protected function tearDown()
         // {
-        //     Client::deleteAll()
+        //     Client::deleteAll();
         // }
 
         function test_getClientName()
@@ -34,6 +34,29 @@
 
             $this->assertEquals("Bill", $result);
         }
+
+        function test_getId()
+        {
+            $name = "Sally";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
+
+            $client_name = "Bill";
+            $phone = "1234567890";
+            $email = "m@gmail.com";
+            $stylist_id = 1;
+
+            $test_client_name = new Client($client_name, $phone, $email, $stylist_id, $id);
+            $test_client_name->save();
+
+            $result = $test_client_name->getId();
+
+            $this->assertEquals(true, is_numeric($result));
+
+
+        }
+
     }
 
 
