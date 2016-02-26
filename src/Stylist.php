@@ -12,7 +12,7 @@
 
         function setName($new_name)
         {
-            $this_name = $new_name;
+            $this_name = (string) $new_name;
         }
 
         function getName()
@@ -20,7 +20,7 @@
             return $this->name;
         }
 
-        function getid()
+        function getId()
         {
             return $this->id;
         }
@@ -29,6 +29,12 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO stylists (name) VALUES ('{$this->getName()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
 
         static function getAll()
@@ -53,15 +59,19 @@
         {
             $found_stylist = null;
             $stylists = Stylist::getAll();
+
             foreach($stylists as $stylist) {
-                $stylist_id = $stylist->getId();
-                if ($stylist_id == $search_id) {
+                if ($stylist->getId() == $search_id) {
                   $found_stylist = $stylist;
                 }
             }
             return $found_stylist;
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
+        }
 
     }
 

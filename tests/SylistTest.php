@@ -85,7 +85,7 @@
         }
 
         function test_find()
-       {
+        {
            //Arrange
            $name = "Sally";
            $name2 = "Bill";
@@ -97,6 +97,36 @@
            $result = stylist::find($test_stylist->getId());
            //Assert
            $this->assertEquals($test_stylist, $result);
+        }
+
+        function test_update()
+       {
+           //Arrange
+            $name = "Sally";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+
+            $new_name = "Frank";
+            //Act
+            $test_stylist->update($new_name);
+            //Assert
+            $this->assertEquals("Frank", $test_stylist->getName());
+       }
+
+       function testDelete()
+       {
+           //Arrange
+           $name = "Sally";
+           $id = null;
+           $test_stylist = new Stylist($name, $id);
+           $test_stylist->save();
+           $name2 = "Bill";
+           $test_stylist2 = new Stylist($name2, $id);
+           $test_stylist2->save();
+           //Act
+           $test_stylist->delete();
+           //Assert
+           $this->assertEquals([$test_stylist2], Stylist::getAll());
        }
 
 
