@@ -42,7 +42,7 @@
        }
 
        function test_save()
-        {
+       {
             //Arrange
             $name = "Sally";
             $test_Stylist = new Stylist($name);
@@ -52,6 +52,22 @@
             //Assert
             $this->assertEquals($test_Stylist, $result[0]);
         }
+
+        function test_getAll()
+       {
+           //Arrange
+           $name = "Sally";
+           $name2 = "Bill";
+           $test_Stylist = new Stylist($name);
+           $test_Stylist->save();
+           $test_Stylist2 = new Stylist($name2);
+           $test_Stylist2->save();
+           //Act
+           $result = Stylist::getAll();
+           //Assert
+           $this->assertEquals([$test_Stylist, $test_Stylist2], $result);
+       }
+
 
     }
 
