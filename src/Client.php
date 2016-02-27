@@ -21,9 +21,9 @@
             return $this->client_name;
         }
 
-        function setClientName()
+        function setClientName($new_client_name)
         {
-            $this->client_name = (string) $new_client_name;
+            $this->client_name = $new_client_name;
         }
 
         function getPhone()
@@ -61,6 +61,12 @@
            $GLOBALS['DB']->exec("INSERT INTO clients (name, phone, email, stylist_id) VALUES ('{$this->getClientName()}', '{$this->getPhone()}', '{$this->getEmail()}', {$this->getStylistId()});");
            $this->id = $GLOBALS['DB']->lastInsertId();
        }
+
+       function updateClientName($new_client_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}' WHERE id = {$this->getId()};");
+            $this->setClientName($new_client_name);
+        }
 
         static function getAll()
         {

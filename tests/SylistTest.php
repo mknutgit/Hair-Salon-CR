@@ -99,20 +99,21 @@
            $this->assertEquals($test_stylist, $result);
         }
 
-        function testUpdate()
+        function test_update()
         {
             //Arrange
-            $name = "Adam";
+            $name = "Frank";
             $test_stylist = new Stylist($name);
             $test_stylist->save();
-            $new_name = "Bob";
+
+            $new_name = "Bo";
             //Act
             $test_stylist->update($new_name);
             //Assert
-            $this->assertEquals("Bob", $test_stylist->getName());
+            $this->assertEquals("Bo", $test_stylist->getName());
         }
 
-       function testDelete()
+       function test_delete()
        {
            //Arrange
            $name = "Sally";

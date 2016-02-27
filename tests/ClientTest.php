@@ -154,6 +154,26 @@
             $this->assertEquals($test_client, $result);
         }
 
+        function test_updateClientName()
+       {
+           //Arrange
+           $client_name = "Harry";
+           $phone = "1234567890";
+           $email = "m@gmail.com";
+           $stylist_id = 1;
+           $id = null;
+
+           $test_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+           $test_client->save();
+
+           $new_name = "Matt";
+           //Act
+           $test_client->updateClientName($new_name);
+           //Assert
+           $this->assertEquals("Matt", $test_client->getClientName());
+       }
+
+
     }
 
 
