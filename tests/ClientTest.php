@@ -154,7 +154,7 @@
             $this->assertEquals($test_client, $result);
         }
 
-        function test_updateClientName()
+        function test_update()
        {
            //Arrange
            $client_name = "Harry";
@@ -168,10 +168,35 @@
 
            $new_name = "Matt";
            //Act
-           $test_client->updateClientName($new_name);
+           $test_client->update($new_name, $phone, $email);
            //Assert
            $this->assertEquals("Matt", $test_client->getClientName());
        }
+
+       function testDelete()
+        {
+            //Arrange
+            $client_name = "Harry";
+            $phone = "1234567890";
+            $email = "m@gmail.com";
+            $stylist_id = 1;
+            $id = null;
+
+            $client_name2 = "Tom";
+            $phone2 = "1234567890";
+            $email2 = "t@gmail.com";
+            $stylist_id2 = 2;
+
+            $test_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+            $test_client->save();
+            $test_client2 = new Client($client_name2, $phone2, $email2, $stylist_id2, $id);
+            $test_client2->save();
+            //Act
+            $test_client->delete();
+            //Assert
+            $this->assertEquals([$test_client2], Client::getAll());
+        }
+
 
 
     }

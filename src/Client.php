@@ -31,7 +31,7 @@
             return $this->phone;
         }
 
-        function setPhone()
+        function setPhone($new_phone)
         {
             $this->phone = $new_phone;
         }
@@ -41,7 +41,7 @@
             return $this->email;
         }
 
-        function setEmail()
+        function setEmail($new_email)
         {
             $this->email = $new_email;
         }
@@ -62,10 +62,12 @@
            $this->id = $GLOBALS['DB']->lastInsertId();
        }
 
-       function updateClientName($new_client_name)
+       function update($new_client_name, $new_phone, $new_email)
         {
-            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}', '{$new_phone}', '{$new_email}' WHERE id = {$this->getId()};");
             $this->setClientName($new_client_name);
+            $this->setPhone($new_phone);
+            $this->setEmail($new_email);
         }
 
         static function getAll()
@@ -100,6 +102,11 @@
         {
            $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
+
+        function delete()
+      {
+          $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
+      }
 
 
     }
