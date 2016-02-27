@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{ stylist.getName }}</h1>
+
+            {% if clients is not empty %}
+                <p>Here are all your clients:</p>
+                <ul>
+                    {% for client in clients %}
+                        <li>{{ client.getClientName }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>None Added Yet</p>
+            {% endif %}
+
+            <h4>Add a client</h4>
+
+
+            <form action='/clients/{{ stylist.getId }}' method='post'>
+                <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId()}}">
+                <label for='name'>Client name</label>
+                <input id='name' name='name' type='text'></br>
+                <label for='phone'>Phone</label>
+                <input id='phone' name='phone' type='text'></br>
+                <label for='email'>Email</label>
+                <input id='email' name='email' type='text'></br>
+
+                <button type='submit'>Add client</button>
+            </form>
+            <p><a href="/stylists/{{ stylist.getId }}/edit">Edit this stylist</a></p>
+
+            <form action="/stylists/{{ stylist.getId }}" method="post">
+              <input name="_method" type="hidden" value="delete">
+
+              <button type="submit">Delete this stylist</button>
+            </form>
+
+            <p><a href='/'>Home</a></p>
+        </div>
+    </body>
+</html>
