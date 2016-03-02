@@ -28,11 +28,19 @@
        return $app['twig']->render('index.html.twig', array('stylists'=> Stylist::getAll()));
    });
 
-   /**shows single cuisine**/
-   $app->get("/clients/{id}", function($id) use ($app){
+   /**shows single stylist**/
+   $app->get("/stylists/{id}", function($id) use ($app){
        $this_stylist = Stylist::find($id);
-       $stylists = $this_stylist->getClients();
-       return $app['twig']->render('cuisines.html.twig', array('clients'=> $clients, 'stylist' => $this_stylist));
+       $clients = $this_stylist->getClients();
+       return $app['twig']->render('stylists.html.twig', array('clients' => $clients, 'stylist' => $this_stylist));
    });
+
+  
+
+
+
+
+
+
    return $app;
 ?>

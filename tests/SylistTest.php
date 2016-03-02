@@ -99,6 +99,32 @@
            $this->assertEquals($test_stylist, $result);
         }
 
+        function testGetClients()
+        {
+            //Arrange
+            $name = "Sally";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
+
+            $client_name = "Bill";
+            $phone = "1234567890";
+            $email = "m@gmail.com";
+            $stylist_id = $test_stylist->getId();
+            $test_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+            $test_client->save();
+
+            $client_name2 = "Jim";
+            $phone2 = "1234567890";
+            $email2 = "g@gmail.com";
+            $test_client2 = new Client($client_name2, $phone2, $email2, $stylist_id, $id);
+            $test_client2->save();
+            //Act
+            $result = $test_stylist->getClients();
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
         function test_update()
         {
             //Arrange

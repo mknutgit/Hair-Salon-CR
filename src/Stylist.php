@@ -51,9 +51,9 @@
         }
 
         static function deleteAll()
-       {
+        {
          $GLOBALS['DB']->exec("DELETE FROM stylists;");
-       }
+        }
 
         static function find($search_id)
         {
@@ -66,6 +66,22 @@
                 }
             }
             return $found_stylist;
+        }
+
+        function getClients()
+        {
+            $clients = Array();
+            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()}");
+            foreach($returned_clients as $client) {
+                $client_name = $client['name'];
+                $phone = $client['phone'];
+                $email = $client['email'];
+                $stylist_id = $client['stylist_id'];
+                $id = $client['id'];
+                $new_client = new Client($client_name, $phone, $email, $stylist_id, $id);
+                array_push($clients, $new_client);
+            }
+            return $clients;
         }
 
         function delete()

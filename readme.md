@@ -23,7 +23,7 @@ Create an app for a hair salon. The owner should be able to add a list of their 
 _CREATE DATABASE hair_salon;_
 _USE hair_salon;_
 _CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR (255));_
-_CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), phone VARCHAR (255), email VARCHAR (255) stylist_id int);_
+_CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR (255), phone VARCHAR (255), email VARCHAR (255), stylist_id int);_
 _CREATE DATABASE hair_salon_
 
 ## Known Bugs
