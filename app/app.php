@@ -93,7 +93,23 @@
        Stylist::deleteAll();
        Client::deleteAll();
        return $app['twig']->render('index.html.twig');
-   });
+    });
+
+    /*delete cuisines*/
+    $app->delete("/stylists/{id}", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        $stylist->delete();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
+    /*edit stylist*/
+    $app->patch("/stylist/{id}/change", function($id) use ($app) {
+        $name = $_POST['name'];
+        $stylist = Stylist::find($id);
+        $stylist->update($name);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
 
 
 
