@@ -17,7 +17,7 @@
                 <ul>
                     {% for client in clients %}
                         <li><a href="/clients/{{ client.getId }}/description">{{ client.getClientName }}
-                        {% for cuisine in cuisines %}
+                        {% for stylist in stylists %}
                             {% if stylist.getId == client.getStylistId %}
                             <em>{{ stylist.getName}}</em>
                             {% endif %}
