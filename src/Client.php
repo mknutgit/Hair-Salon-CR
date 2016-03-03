@@ -64,7 +64,7 @@
 
        function update($new_client_name, $new_phone, $new_email)
         {
-            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}', '{$new_phone}', '{$new_email}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}', phone = '{$new_phone}', email = '{$new_email}' WHERE id = {$this->getId()};");
             $this->setClientName($new_client_name);
             $this->setPhone($new_phone);
             $this->setEmail($new_email);

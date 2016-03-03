@@ -4,7 +4,7 @@
     require_once __DIR__."/../src/Stylist.php";
 
     $app = new Silex\Application();
-    $server = 'mysql:host=localhost;dbname=hair_salon';
+    $server = 'mysql:host=localhost:8889;dbname=hair_salon';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -67,11 +67,11 @@
 
     /*edit client by id*/
     $app->patch("/clients/{id}/edit", function($id) use ($app) {
-        $name = $_POST['name'];
+        $client_name = $_POST['name'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $client = Client::find($id);
-        $client->update($name, $phone, $email);
+        $client->update($client_name, $phone, $email);
         return $app['twig']->render('client_details.html.twig', array('client' => $client));
     });
 
@@ -95,7 +95,7 @@
        return $app['twig']->render('index.html.twig');
     });
 
-    /*delete cuisines*/
+    /*delete stylists*/
     $app->delete("/stylists/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
